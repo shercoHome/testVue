@@ -8,6 +8,8 @@
 ## 阮一峰常用 Git 命令清单
 http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
 
+
+## 四个重要定义
 ```
 Workspace：工作区
 Index / Stage：暂存区
