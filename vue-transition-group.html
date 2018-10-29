@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <title>test vue1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+</head>
+
+<body>
+  <h3>列表过渡</h3>
+<a href="https://www.lodashjs.com/">Lodash是一个一致性、模块化、高性能的 JavaScript 实用工具库。通过降低 array、number、objects、string 等等的使用难度从而让
+  JavaScript 变得更简单.</a>
+  <br><br>
+  <div id="list-demo" class="demo">
+    <button v-on:click="add">Add</button>
+    <button v-on:click="remove">Remove</button>
+<button @click="shuffle">shuffle</button>
+    <transition-group name="list" tag="p">
+      <span v-for="item in items" v-bind:key="item" class="list-item">
+        {{ item }}
+      </span>
+    </transition-group>
+  </div>
+  <script>
+    new Vue({
+      el: '#list-demo',
+      data: {
+        items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        nextNum: 10
+      },
+      methods: {
+        randomIndex: function () {
+          return Math.floor(Math.random() * this.items.length)
+        },
+        add: function () {
+          this.items.splice(this.randomIndex(), 0, this.nextNum++)
+        },
+        remove: function () {
+          this.items.splice(this.randomIndex(), 1)
+        },
+shuffle: function () {
+this.items = _.shuffle(this.items)//lodashjs 库 费雪耶茨洗牌，重排的方法
+}
+      }
+    })
+  </script>
+  <style>
+.list-move {
+transition: transform 1s;
+}
+/*
+v-move特性，它会在元素的改变定位的过程中应用,
+
+ transition 属性是一个简写属性，用于设置四个过渡属性：
+transition-property 规定设置过渡效果的 CSS 属性的名称,默认all。
+transition-duration 规定完成过渡效果需要多少秒或毫秒。
+transition-timing-function 规定速度效果的速度曲线。
+transition-delay 定义过渡效果何时开始。
+
+
+Vue 使用了一个叫 FLIP 简单的动画队列
+使用 transforms 将元素从之前的位置平滑过渡新的位置
+display: inline 须设置为 display: inline-block 或者放置于 flex 中
+ */
+
+/* transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。
+如：translate scaleX rotateX perspective */
+    .list-item {
+      display: inline-block;
+      margin-right: 10px;
+
+    }
+
+    .list-enter-active,
+    .list-leave-active {
+      transition: all 1s;
+    }
+.list-leave-active{
+position: absolute;
+}
+    .list-enter,
+    .list-leave-to
+    /* .list-leave-active for below version 2.1.8 */
+      {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+  </style>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <title>test vue1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <h3>测试 Vue 作用域插槽</h3>
+  <div id="app">
+    <my-list v-bind="shapes">
+      <!-- <div> {{ item.name }} <small>({{ item.sides }} sides)</small></div> -->
+        <!-- 将 `slotProps` 定义为插槽作用域的名字 -->
+        <template slot-scope="what">
+          <!-- 为待办项自定义一个模板，-->
+          <div> {{ what.item.name }} <small>({{ what.item.sides }} sides)</small></div>
+        </template>
+    </my-list>
+    <my-list v-bind="colors">
+        <template slot-scope="what">
+          <!-- 为待办项自定义一个模板，-->
+          <div> {{ what.item.name }} <small>({{ what.item.hex }} )</small></div>
+        </template>
+    </my-list>
+
+        <my-list v-bind="ages">
+        <template slot-scope="what">
+          <!-- 为待办项自定义一个模板，-->
+          <div> {{ what.item.name }} <small>({{ what.item.num }} )</small></div>
+        </template>
+        </my-list>
+  </div>
+
+  <script>
+    Vue.component('my-list', {
+      template: '\
+        <div class= "my-list" >\
+          <div class="title">{{ title }}</div>\
+          <div class="list">\
+            <div class="list-item" v-for="item in items">\
+                <slot v-bind:item="item">\
+                  {{ item.name }}\
+                </slot >\
+             </div >\
+          </div>\
+        </div>\
+    ',
+      props: {
+        title: String,
+        items: Array
+      }
+    });
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          shapes: {
+            title: "Shapes",
+            items: [{
+                name: 'Square',
+                sides: 4
+              },
+              {
+                name: 'Hexagon',
+                sides: 6
+              },
+              {
+                name: 'Triangle',
+                sides: 3
+              }
+            ]
+          },
+          colors: {
+            title: "Colors",
+            items: [{
+                name: 'Yellow',
+                hex: '#f4d03f'
+              },
+              {
+                name: 'Green',
+                hex: '#229954'
+              },
+              {
+                name: 'Purple',
+                hex: '#9b59b6'
+              }
+            ]
+          },
+          ages: {
+            title: "Ages",
+            items: [{
+                name: 'man',
+                num: 22
+              },
+              {
+                name: 'woman',
+                num: 33
+              },
+              {
+                name: 'children',
+                num: 11
+              }
+            ]
+          }
+        }
+      }
+    });
+  </script>
+  <style>
+    .my-list {
+      width: 40%;
+      margin: 5%;
+      float: left;
+      font-size: 24px;
+
+    }
+
+    .my-list .title {
+      background: rgb(212, 50, 58);
+      padding: 16px;
+      box-sizing: border-box;
+    }
+
+    .my-list .list-item {
+      background: rgb(32, 193, 214);
+      padding: 16px;
+      box-sizing: border-box;
+    }
+  </style>
+</body>
+
+</html>

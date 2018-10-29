@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <title>test reCAPTCHA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    var opt_widget_id; //grecaptcha标识
+    var grecaptchaGetResponse; //grecaptcha验证成功返回值
+    function grecaptchaOnloadCallback() {
+      console.log("grecaptcha is ready!");
+      opt_widget_id = grecaptcha.render(
+        "recaptchaBoxId", {
+          sitekey: "6LdNT3QUAAAAAJDkcZ9rVKtB-AOKp7qSD2C-W9m3",
+          // theme: "dark",
+          callback: function () {
+            y("好像验证成功了，请点击提交");
+            grecaptchaGetResponse = grecaptchaGetResponseFun();
+          }
+        }
+      );
+      console.log(opt_widget_id); //0
+    };
+
+    function grecaptchaResetFun() {
+      grecaptcha.reset(
+        opt_widget_id //重置reCAPTCHA小部件。可选的小部件ID，默认为未指定时创建的第一个小部件。
+      )
+    }
+
+    function grecaptchaGetResponseFun() {
+      var re = grecaptcha.getResponse(
+        opt_widget_id //获取reCAPTCHA小部件的响应。可选的小部件ID，默认为未指定时创建的第一个小部件。
+      );
+      return re;
+    }
+    $(document).ready(function () {
+      $("#testGoogleRecaptcha").submit(function (e) {
+        e.preventDefault();
+        if (grecaptchaGetResponse) {
+          y("人类身份验证确认成功");
+          $.ajax({
+            url: "/g-recaptcha-verify.aspx", //请求的url地址
+            dataType: "json", //返回格式为json
+            async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+            data: {
+              "responseCode": grecaptchaGetResponse
+            }, //参数值
+            type: "POST", //请求方式
+            beforeSend: function () {
+              //请求前的处理
+              z("发送后台验证密钥")
+            },
+            success: function (req) {
+              //请求成功时处理
+              z("请求后台成功");
+              if (req == "ok") {
+
+                z("密钥验证成功");
+              }
+            },
+            complete: function () {
+              //请求完成的处理
+              z("请求后台完成");
+            },
+            error: function () {
+document.getElementById("x").innerText ="请求后台出错，重置grecaptcha ";
+              z("请求后台出错，重置grecaptcha ");
+              grecaptchaResetFun();
+            }
+          });
+        } else {
+          y("请先进行人机身份验证");
+        }
+      });
+    });
+
+
+    function y(s) {
+      document.getElementById("y").innerText = s;
+    }
+
+    function z(s) {
+      document.getElementById("z").innerText = s;
+    }
+  </script>
+</head>
+
+<body>
+  <h3>测试 reCAPTCHA</h3>
+  <script src="https://www.recaptcha.net/recaptcha/api.js?onload=grecaptchaOnloadCallback&render=explicit" async defer></script>
+  <!-- <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback" async defer></script> -->
+
+  <form id="testGoogleRecaptcha">
+    <div id="recaptchaBoxId"></div>
+    <!-- <div class="g-recaptcha" data-theme="dark" data-sitekey="6LezHnQUAAAAANn6AAcKsobr_KNP8WiZeXNIhyV0">   </div>-->
+    <br />
+    <input type="submit" value="Submit">
+  </form>
+<h3 id="x"></h3>
+  <h3 id="y"></h3>
+  <h3 id="z"></h3>
+  <!-- api.js
+onload=js                加载完成的回调
+render=explicit  onload  是否显式呈现窗口小部件,默认为onload，这将在它找到的第一个g-recaptcha标记中呈现小部件。
+data-theme: dark light
+data-size:  compact normal
+data-callback:           可选的。回调函数的名称，在用户提交成功响应时执行。 g-recaptcha-response令牌传递给你的回调。
+data-expired-callback    可选的。回调函数的名称，在reCAPTCHA响应到期且用户需要重新验证时执行。
+data-error-callback      可选的。回调函数的名称，在reCAPTCHA遇到错误（通常是网络连接）时执行，并且在连接恢复之前无法继续。如果您在此处指定了一个函数，则您有责任通知用户他们应该重试。
+
+grecaptcha.reset(
+opt_widget_id      //重置reCAPTCHA小部件。可选的小部件ID，默认为未指定时创建的第一个小部件。
+)
+grecaptcha.getResponse(
+opt_widget_id //获取reCAPTCHA小部件的响应。可选的小部件ID，默认为未指定时创建的第一个小部件。
+)
+
+
+-->
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <title>test vue1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+  <script src="pikadayCN.js"></script>
+
+<link rel="stylesheet" href="https://dbushell.com/Pikaday/css/pikaday.css">
+</head>
+
+<body>
+  <h3>测试 Vue 日期插件</h3>
+  <div id="app">
+    <input ref="inputDateStart" v-model="dateStart" type="text">
+
+    <input ref="inputDateEnd" v-model="dateEnd" type="text">
+
+    <h3>日期范围：{{dateStartToEnd}}</h3>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        dateStart: '2018-10-01',
+        dateEnd: '2018-10-05'
+      },
+      computed: {
+        dateStartToEnd: function () {
+          return this.dateStart + " To " + this.dateEnd;
+        }
+      },
+      mounted: function () {
+
+        this.attachDatepicker('inputDateStart');
+        this.attachDatepicker('inputDateEnd');
+
+      },
+      methods: {
+        attachDatepicker: function (refName) {
+          var that = this;
+          var picker = new Pikaday({
+            field: this.$refs[refName],
+            format: 'YYYY-MM-DD',
+            onSelect: function () {
+              var thisDate = this.getMoment().format('YYYY-MM-DD');
+              var thisDateIsDate = moment(thisDate).toDate();
+              console.log(thisDateIsDate);
+              console.log(thisDateIsDate instanceof Date); //true
+              var theDateName = refName.replace("inputDate", "date");//string
+              console.log(theDateName, thisDate);
+              that[theDateName] = thisDate;
+            }
+          })
+          this.$once('hook:beforeDestroy', function () {
+            picker.destroy()
+          })
+        }
+      }
+    })
+  </script>
+
+
+</body>
+
+</html>
