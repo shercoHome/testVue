@@ -19,25 +19,25 @@ Remote：远程仓库
 
 ## 初始化
 
-#### 初始化，在当前目录（项目）下生成.git文件夹 （互传的配置文件） 工作区
+#### 1、初始化，在当前目录（项目）下生成.git文件夹 （互传的配置文件） 工作区
 ```
 $ git init
 ```
-#### 将某文件（README.md）添加到缓存区
+#### 2、将某文件（README.md）添加到缓存区
 ```
 $ git add README.md
 //git add . 添加当前目录的所有文件到缓存区
 //git add -A 将新增、删除、修改的文件改动全保存至缓存区
 ```
-#### 将代码从缓存区保存至本地仓库
+#### 3、将代码从缓存区保存至本地仓库
 ```
 $ git commit -m "备注信息"
 ```
-#### 增加一个新的远程仓库，并命名  git remote add [shortname] [url]
+#### 4、增加一个新的远程仓库，并命名  git remote add [shortname] [url]
 ```
 $ git remote add origin https://github.com/shercoHome/tt.git
 ```
-#### 上传本地指定分支到远程仓库  git push [remote] [branch]
+#### 5、上传本地指定分支到远程仓库  git push [remote] [branch]
 ```
 $ git push -u origin master
 ```
