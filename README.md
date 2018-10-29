@@ -20,3 +20,8 @@ git push -u origin master
 git remote add origin https://github.com/shercoHome/tt.git
 git push -u origin master
 ```
+
+## test action
+```
+git push -u origin master
+```
