@@ -47,6 +47,13 @@ git push -u origin master
 ```
 
 ## test action 88899
+## 下载远程仓库的所有变动
+$ git fetch [remote]
+
+## 取回远程仓库的变化，并与本地分支合并
+$ git pull [remote] [branch]
+
+## test action 888
 ```
 git push -u origin master
 ```
