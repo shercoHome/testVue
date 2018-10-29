@@ -1,12 +1,14 @@
 # Test Vue
 
-### 仓库（Repository）
-### 收藏（Star），方便下次查看
-### 复制克隆项目（Fork）
-### shadowsocks
-
-## 阮一峰常用 Git 命令清单
+#### 阮一峰常用 Git 命令清单
 http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
+
+```
+收藏（Star），方便下次查看
+复制克隆项目（Fork）
+shadowsocks 一个科学上网的工具？？
+```
+
 
 
 ## 四个重要定义
