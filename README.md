@@ -5,7 +5,7 @@
 ### 复制克隆项目（Fork）
 ### shadowsocks
 
-##阮一峰常用 Git 命令清单
+## 阮一峰常用 Git 命令清单
 http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
 
 ```
