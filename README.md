@@ -1,4 +1,4 @@
-# Test Vue 666
+# Test Vue
 
 #### 阮一峰常用 Git 命令清单
 http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
