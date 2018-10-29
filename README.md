@@ -2,7 +2,8 @@
 
 #### 阮一峰常用 Git 命令清单
 http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
-
+#### git图解：代码区域总结
+https://zhuanlan.zhihu.com/p/20175919
 ```
 收藏（Star），方便下次查看
 复制克隆项目（Fork）
