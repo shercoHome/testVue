@@ -3,90 +3,85 @@
 
 <head>
   <title>test vue1</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </head>
 
 <body>
-<h3>测试 Vue 进入/离开(元素与组件过渡)</h3>
-<a href="https://github.com/daneden/animate.css" target="_blank">animate.css@gitbub</a>
-<br><br>
-<div id="demo">
-  <button v-on:click="show = !show">
-    Toggle
-  </button>
-<!-- Vue 提供了 transition 的封装组件，在下列情形中，可以给任何元素和组件添加进入/离开过渡 -->
-<transition
-name=""
-enter-active-class="animated rotateInUpLeft"
-leave-active-class="animated rotateOutUpLeft"
-appear
-appear-class="custom-appear-class"
-appear-active-class="custom-appear-active-class"
->
-<!--    自定义过渡类名：     name可不写   引入animate.css 需要在前面加animated，后面接动画的css          -->
-<p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam
-fermentum id. Pellentesque habitant morbi tristique senectus et netus.<br><br>
+  <h3>测试 Vue 进入/离开(元素与组件过渡)</h3>
+  <a href="https://github.com/daneden/animate.css" target="_blank">animate.css@gitbub</a>
+  <br><br>
+  <div id="demo">
+    <button v-on:click="show = !show">
+      Toggle
+    </button>
+    <!-- Vue 提供了 transition 的封装组件，在下列情形中，可以给任何元素和组件添加进入/离开过渡 -->
+    <transition name="" enter-active-class="animated rotateInUpLeft" leave-active-class="animated rotateOutUpLeft"
+      appear appear-class="custom-appear-class" appear-active-class="custom-appear-active-class">
+      <!--    自定义过渡类名：     name可不写   引入animate.css 需要在前面加animated，后面接动画的css          -->
+      <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia
+        diam
+        fermentum id. Pellentesque habitant morbi tristique senectus et netus.<br><br>
 
-也就是当前transition元素第一次渲染时的过渡动画，它也提供了两个css动画钩子：<br>
-appear：表示是否开启此特性<br>
-appear-class：表示元素渲染完毕后应用的css样式，它里面的css样式会参与整个动画的过渡<br>
-appear-active-class：也表示元素渲染完毕后应用的css样式，它不参与整个动画的过渡<br>
-</p>
-  </transition>
+        也就是当前transition元素第一次渲染时的过渡动画，它也提供了两个css动画钩子：<br>
+        appear：表示是否开启此特性<br>
+        appear-class：表示元素渲染完毕后应用的css样式，它里面的css样式会参与整个动画的过渡<br>
+        appear-active-class：也表示元素渲染完毕后应用的css样式，它不参与整个动画的过渡<br>
+      </p>
+    </transition>
 
 
-<transition>
-  <table v-if="items.length > 0"
-name="bounce"
-    >
-<tr v-for="item in items"
+    <transition>
+      <table v-if="items.length > 0" name="bounce">
+        <tr v-for="item in items">
+          <td>this td name is {{item}}</td>
+        </tr>
+      </table>
+      <p v-else>Sorry, no items found.</p>
+    </transition>
+    {{whatttt}}
 
->
-<td>this td name is {{item}}</td>
-</tr>
-  </table>
-  <p v-else>Sorry, no items found.</p>
-</transition>
-{{whatttt}}
-
-<br>
-<transition name="bounce" mode="out-in">
-<button v-bind:key="isEditing" @click="isEditing = !isEditing">
-{{ isEditing ? 'Save' : 'Edit' }}
-  </button>
-</transition>
-</div>
+    <br>
+    <transition name="bounce" mode="out-in">
+      <button v-bind:key="isEditing" @click="isEditing = !isEditing">
+        {{ isEditing ? 'Save' : 'Edit' }}
+      </button>
+    </transition>
+  </div>
   <script>
-var vm=new Vue({
-el: '#demo',
-data: {
-isEditing:true,
-whatttt:"6666666666",
-show: true,
-items:["a","b","c"]
-}
-})
+    var vm = new Vue({
+      el: '#demo',
+      data: {
+        isEditing: true,
+        whatttt: "6666666666",
+        show: true,
+        items: ["a", "b", "c"]
+      }
+    })
   </script>
-<style>
-.bounce-enter-active {
-animation: bounce-in .5s;
-}
-.bounce-leave-active {
-animation: bounce-in .5s reverse;
-}
-@keyframes bounce-in {
-0% {
-transform: scale(0);
-}
-50% {
-transform: scale(1.5);
-}
-100% {
-transform: scale(1);
-}
-}
+  <style>
+    .bounce-enter-active {
+      animation: bounce-in .5s;
+    }
+
+    .bounce-leave-active {
+      animation: bounce-in .5s reverse;
+    }
+
+    @keyframes bounce-in {
+      0% {
+        transform: scale(0);
+      }
+
+      50% {
+        transform: scale(1.5);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
 
 
 
@@ -96,16 +91,16 @@ transform: scale(1);
 
 
 
-  .custom-appear-class {
-    font-size: 16px;
-    color: red;
-    background: green;
-  }
+    .custom-appear-class {
+      font-size: 16px;
+      color: red;
+      background: green;
+    }
 
-  .custom-appear-active-class {
-    background: green;
-  }
-</style>
+    .custom-appear-active-class {
+      background: green;
+    }
+  </style>
 </body>
 
 </html>
